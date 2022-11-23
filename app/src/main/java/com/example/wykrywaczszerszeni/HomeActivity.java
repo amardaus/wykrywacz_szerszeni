@@ -135,10 +135,6 @@ public class HomeActivity extends AppCompatActivity {
 
         //mRecorder.stop();
 
-        //MediaPlayer warningSound = MediaPlayer.create(HomeActivity.this, R.raw.sound);
-        //warningSound.start();
-        //statusTextView.setText("Recording Stopped");
-
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override

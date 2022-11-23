@@ -4,9 +4,9 @@
     android:fillEnabled="true">
     <scale
         android:fromXScale="0.1"
-        android:toXScale="5"
+        android:toXScale="8"
         android:fromYScale="0.1"
-        android:toYScale="5"
+        android:toYScale="8"
         android:pivotX="50%"
         android:pivotY="50%"/>
 </set>
