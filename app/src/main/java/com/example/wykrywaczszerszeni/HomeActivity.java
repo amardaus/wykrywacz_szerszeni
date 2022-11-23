@@ -3,8 +3,6 @@ package com.example.wykrywaczszerszeni;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-import static androidx.core.content.PackageManagerCompat.LOG_TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -13,16 +11,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -139,8 +132,16 @@ public class HomeActivity extends AppCompatActivity {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(HomeActivity.this, ResultActivity.class);
-                startActivity(intent);
+                boolean hornet_identified = false;
+
+                if(hornet_identified){
+                    Intent intent = new Intent(HomeActivity.this, DangerActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(HomeActivity.this, SafeActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

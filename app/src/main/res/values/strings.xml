@@ -18,6 +18,12 @@
     <string name="stop_playing">Stop Playing</string>
     <string name="status">Status</string>
 
-    <string name="identified">Zidentyfikowano SZERSZENIA</string>
-    <string name="identified_btn">Ok uciekam!!!</string>
+    <string name="result_danger">Zidentyfikowano SZERSZENIA</string>
+    <string name="result_danger_btn">Ok uciekam!!!</string>
+    <string name="result_safe">To NIE jest szerszeń</string>
+    <string name="result_safe_btn">OK</string>
+    <string name="disclaimer">*Twórcy programu nie ponoszą
+        odpowiedzialności za ewentualne ukąszenia szerszenia
+        nawet jeśli nie zostanie on poprawnie rozpoznany
+    </string>
 </resources>
