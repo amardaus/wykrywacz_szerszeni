@@ -24,4 +24,11 @@
     <style name="Theme.WykrywaczSzerszeni.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.WykrywaczSzerszeni.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="startstop">
+        <item name="android:textSize">10sp</item>
+        <item name="android:scaleX">0.3</item>
+        <item name="android:scaleY">0.3</item>
+    </style>
+
 </resources>

@@ -9,18 +9,7 @@
     tools:context=".HomeActivity">
 
     <!--Heading Text View-->
-    <TextView
-        android:id="@+id/txthead"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/audio_recorder"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="30sp" />
 
-    <!--This will display the status of our app when
-        we will record some audio and play that audio-->
     <TextView
         android:id="@+id/textViewStatus"
         android:layout_width="match_parent"
@@ -37,41 +26,33 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        android:weightSum="4">
+        android:orientation="vertical">
 
-        <!--Textview to start audio recording
-            drawableTop will add above mic image-->
-        <TextView
-            android:id="@+id/btnRecord"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/purple_500"
-            android:padding="5dp"
+        <Button
+            android:id="@+id/recStart"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle"
+            android:drawableTop="@drawable/start_rec_smaller"
+            android:paddingTop="20dp"
+            android:paddingBottom="30dp"
             android:text="@string/start_recording"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            app:drawableTopCompat="@mipmap/ic_launcher_round" />
+            android:textColor="#fff" />
 
-        <!--Textview to stop audio recording
-            drawableTop will add above mic image-->
-        <TextView
-            android:id="@+id/btnStop"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/purple_500"
-            android:padding="5dp"
+        <Button
+            android:id="@+id/recStop"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle"
+            android:drawableTop="@drawable/stop_rec_smaller"
+            android:paddingTop="20dp"
+            android:paddingBottom="30dp"
             android:text="@string/stop_recording"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            app:drawableTopCompat="@mipmap/ic_launcher_round" />
+            android:textColor="#fff" />
 
-        <!--Textview to play audio that is recorded
-            drawableTop will add above mic image-->
+        <!--
         <TextView
             android:id="@+id/btnPlay"
             android:layout_width="0dp"
@@ -85,8 +66,6 @@
             android:textColor="@color/white"
             app:drawableTopCompat="@mipmap/ic_launcher_round" />
 
-        <!--Textview to pause the play of audio recording
-            drawableTop will add above mic image-->
         <TextView
             android:id="@+id/btnStopPlay"
             android:layout_width="0dp"
@@ -100,6 +79,7 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             app:drawableTopCompat="@mipmap/ic_launcher_round" />
+            -->
 
     </LinearLayout>
 </RelativeLayout>

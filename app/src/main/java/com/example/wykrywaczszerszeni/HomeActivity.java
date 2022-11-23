@@ -9,13 +9,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -35,16 +41,16 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        startRec = findViewById(R.id.btnRecord);
-        stopRec = findViewById(R.id.btnStop);
-        startPlay = findViewById(R.id.btnPlay);
-        stopPlay = findViewById(R.id.btnStopPlay);
+        startRec = findViewById(R.id.recStart);
+        stopRec = findViewById(R.id.recStop);
+
+        startRec.setVisibility(View.VISIBLE);
+        stopRec.setVisibility(View.GONE);
+
+        //startPlay = findViewById(R.id.btnPlay);
+        //stopPlay = findViewById(R.id.btnStopPlay);
         statusTextView = findViewById(R.id.textViewStatus);
 
-        startRec.setBackgroundColor(getResources().getColor(R.color.dark_brown));
-        stopRec.setBackgroundColor(getResources().getColor(R.color.gray));
-        startPlay.setBackgroundColor(getResources().getColor(R.color.gray));
-        stopPlay.setBackgroundColor(getResources().getColor(R.color.gray));
 
         startRec.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
                 stopRecording();
             }
         });
-        startPlay.setOnClickListener(new View.OnClickListener() {
+        /*startPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startPlaying();
@@ -69,16 +75,19 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 stopPlaying();
             }
-        });
+        });*/
     }
 
     private void startRecording() {
         if (checkPermissions()) {
 
-            startRec.setBackgroundColor(getResources().getColor(R.color.ugly_yellow));
+            /*startRec.setBackgroundColor(getResources().getColor(R.color.ugly_yellow));
             stopRec.setBackgroundColor(getResources().getColor(R.color.dark_brown));
             startPlay.setBackgroundColor(getResources().getColor(R.color.gray));
             stopPlay.setBackgroundColor(getResources().getColor(R.color.gray));
+            */
+            startRec.setVisibility(View.GONE);
+            stopRec.setVisibility(View.VISIBLE);
 
             mFilename = getExternalCacheDir().getAbsolutePath();
             mFilename += "/audiorecordtest.3gp";
@@ -111,25 +120,40 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void stopRecording() {
-        stopRec.setBackgroundColor(getResources().getColor(R.color.gray));
+        /*stopRec.setBackgroundColor(getResources().getColor(R.color.gray));
         startRec.setBackgroundColor(getResources().getColor(R.color.ugly_yellow));
         startPlay.setBackgroundColor(getResources().getColor(R.color.ugly_yellow));
         stopPlay.setBackgroundColor(getResources().getColor(R.color.ugly_yellow));
+        */
 
-        mRecorder.stop();
+
+        /*mRecorder.stop();
         mRecorder.release();
-        mRecorder = null;
+        mRecorder = null;*/
 
-        Log.d("AMPL", String.valueOf(mRecorder.getMaxAmplitude()));
+        //Log.d("AMPL", String.valueOf(mRecorder.getMaxAmplitude()));
 
-        statusTextView.setText("Recording Stopped");
+        //mRecorder.stop();
+
+        //MediaPlayer warningSound = MediaPlayer.create(HomeActivity.this, R.raw.sound);
+        //warningSound.start();
+        //statusTextView.setText("Recording Stopped");
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(HomeActivity.this, ResultActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void startPlaying() {
-        stopRec.setBackgroundColor(getResources().getColor(R.color.gray));
+        /*stopRec.setBackgroundColor(getResources().getColor(R.color.gray));
         startRec.setBackgroundColor(getResources().getColor(R.color.purple_200));
         startPlay.setBackgroundColor(getResources().getColor(R.color.gray));
-        stopPlay.setBackgroundColor(getResources().getColor(R.color.purple_200));
+        stopPlay.setBackgroundColor(getResources().getColor(R.color.purple_200));*/
 
         // for playing our recorded audio
         // we are using media player class.
