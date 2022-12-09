@@ -4,18 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.RectF;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.View;
 
 import java.util.ArrayList;
 
 public class WaveFormView extends View {
-    private View mView;
     Context context;
     private ArrayList<Float> amplitudes;
     private ArrayList<RectF> spikes;
@@ -25,6 +21,7 @@ public class WaveFormView extends View {
     private float screen_w = 0f;
     private float screen_h = 550f;
     private int maxSpikes = 0;
+    private Canvas mcanvas;
 
     public WaveFormView(Context ctx, AttributeSet attrs) {
         super(ctx, attrs);
@@ -62,8 +59,8 @@ public class WaveFormView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int x = getWidth();
-        int y = getHeight();
+        mcanvas = canvas;
+
         int radius;
         radius = 100;
         Paint paint = new Paint();
@@ -77,5 +74,9 @@ public class WaveFormView extends View {
         }
     }
 
-
+    public void clearCanvas(){
+        init();
+        mcanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        invalidate();
+    }
 }

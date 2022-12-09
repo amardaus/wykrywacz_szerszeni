@@ -11,16 +11,15 @@
     tools:context=".HomeActivity"
     android:gravity="center">
 
-    <!--Heading Text View-->
-
     <TextView
         android:id="@+id/textViewStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:text="@string/status"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/status_init"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="24sp" />
 
     <com.example.wykrywaczszerszeni.WaveFormView
         android:layout_width="match_parent"
@@ -38,9 +37,37 @@
         android:layout_alignParentBottom="true">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/playBtn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="50dp"
+            app:icon="@drawable/play"
+            android:backgroundTint="@color/grrrreen"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            android:layout_marginBottom="50dp"
+            app:iconSize="50dp"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/analyzeBtn"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/black"
+            android:textColor="#fff"
+            android:text="analyze"
+            android:textSize="18dp"
+            android:layout_marginHorizontal="20dp"
+            android:visibility="gone"/>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/recBtn"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"
@@ -51,17 +78,7 @@
             app:iconGravity="textStart"
             app:iconPadding="0dp"
             android:layout_marginBottom="50dp"
-            app:iconSize="50dp"
-            android:layout_marginRight="30dp"/>
-        <Button
-            android:id="@+id/playBtn"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:background="@drawable/circle"
-            android:backgroundTint="@color/black"
-            android:textColor="#fff"
-            android:text="analyze"
-            android:textSize="18dp"/>
+            app:iconSize="50dp" />
     </LinearLayout>
 
 </RelativeLayout>

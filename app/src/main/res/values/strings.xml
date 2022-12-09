@@ -26,4 +26,9 @@
         odpowiedzialności za ewentualne ukąszenia szerszenia
         nawet jeśli nie zostanie on poprawnie rozpoznany
     </string>
+
+    <string name="status_init">Wciśnij przycisk aby rozpocząć nagrywanie</string>
+    <string name="status_listening">Wciśnij przycisk aby zatrzymać nagrywanie</string>
+    <string name="status_choose">Odsłuchaj nagranego dźwięku, przeanalizuj go lub nagraj ponownie</string>
+    <string name="status_play">Odtwarzanie dźwięku...</string>
 </resources>
