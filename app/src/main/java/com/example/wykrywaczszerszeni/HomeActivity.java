@@ -78,6 +78,7 @@ public class HomeActivity extends Activity {
             player.prepare();
             player.start();
             textViewStatus.setText(R.string.status_play);
+
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
@@ -130,6 +131,11 @@ public class HomeActivity extends Activity {
     }
 
     void identify(){
+        textViewStatus.setText(R.string.status_init);
+        analyzeBtn.setVisibility(View.GONE);
+        playBtn.setVisibility(View.GONE);
+        waveformView.clearCanvas();
+
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -145,6 +151,12 @@ public class HomeActivity extends Activity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d("ggggg", "gggggggggg");
     }
 
     @Override
