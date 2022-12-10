@@ -140,7 +140,7 @@ public class HomeActivity extends Activity {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                boolean hornet_identified = false;
+                boolean hornet_identified = true;
 
                 if (hornet_identified) {
                     Intent intent = new Intent(HomeActivity.this, DangerActivity.class);

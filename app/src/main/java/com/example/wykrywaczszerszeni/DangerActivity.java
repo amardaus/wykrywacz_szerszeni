@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.os.Vibrator;
 
 public class DangerActivity extends AppCompatActivity {
 
@@ -19,9 +20,17 @@ public class DangerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_danger);
     }
 
+    void vibrate(){
+        long[] pattern = {0, 1000, 1000};
+        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        v.vibrate(pattern,0);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
+
+        vibrate();
 
         MediaPlayer mediaPlayer = MediaPlayer.create(DangerActivity.this, R.raw.danger_sound2);
         mediaPlayer.start();
