@@ -18,12 +18,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Vibrator;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class DangerActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
     CameraManager mCameraManager;
     String mCameraId = null;
     Vibrator vib;
+    Timer timer;
+    boolean torchOn = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,23 +42,37 @@ public class DangerActivity extends AppCompatActivity {
         vib.vibrate(pattern,0);
     }
 
-    void flash(){
+    void toggleTorch(boolean trchOn){
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mCameraManager.setTorchMode(mCameraId, trchOn);
+            }
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void flash() {
         boolean isFlashAvailable = getApplicationContext().getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-        if(isFlashAvailable){
+        if(isFlashAvailable) {
             mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
             try {
                 mCameraId = mCameraManager.getCameraIdList()[0];
-                try {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        mCameraManager.setTorchMode(mCameraId, true);
-                    }
-                } catch (CameraAccessException e) {
-                    e.printStackTrace();
-                }
             } catch (CameraAccessException e) {
                 e.printStackTrace();
             }
+
+
+
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    toggleTorch(torchOn);
+                    torchOn = !torchOn;
+                }
+            }, 0, 400);
         }
     }
 
@@ -63,6 +82,8 @@ public class DangerActivity extends AppCompatActivity {
         turnOffFlash();
         mediaPlayer.stop();
         vib.cancel();
+        timer.cancel();
+        toggleTorch(false);
     }
 
     void turnOffFlash(){
