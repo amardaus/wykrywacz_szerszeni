@@ -2,8 +2,14 @@ package com.example.wykrywaczszerszeni;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,6 +20,11 @@ import android.os.Vibrator;
 
 public class DangerActivity extends AppCompatActivity {
 
+    MediaPlayer mediaPlayer;
+    CameraManager mCameraManager;
+    String mCameraId = null;
+    Vibrator vib;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +33,46 @@ public class DangerActivity extends AppCompatActivity {
 
     void vibrate(){
         long[] pattern = {0, 1000, 1000};
-        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
-        v.vibrate(pattern,0);
+        vib = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        vib.vibrate(pattern,0);
+    }
+
+    void flash(){
+        boolean isFlashAvailable = getApplicationContext().getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+        if(isFlashAvailable){
+            mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+            try {
+                mCameraId = mCameraManager.getCameraIdList()[0];
+                try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        mCameraManager.setTorchMode(mCameraId, true);
+                    }
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+            } catch (CameraAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        turnOffFlash();
+        mediaPlayer.stop();
+        vib.cancel();
+    }
+
+    void turnOffFlash(){
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mCameraManager.setTorchMode(mCameraId, false);
+            }
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -31,8 +80,9 @@ public class DangerActivity extends AppCompatActivity {
         super.onStart();
 
         vibrate();
+        flash();
 
-        MediaPlayer mediaPlayer = MediaPlayer.create(DangerActivity.this, R.raw.danger_sound2);
+        mediaPlayer = MediaPlayer.create(DangerActivity.this, R.raw.danger_sound2);
         mediaPlayer.start();
 
         TextView resultDangerTextView = findViewById(R.id.resultDangerTextView);
