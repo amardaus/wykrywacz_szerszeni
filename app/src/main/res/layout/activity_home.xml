@@ -9,7 +9,8 @@
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
     tools:context=".HomeActivity"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/yellow">
 
     <TextView
         android:id="@+id/textViewStatus"
@@ -19,6 +20,7 @@
         android:layout_marginHorizontal="20dp"
         android:text="@string/status_init"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="24sp" />
 
     <com.example.wykrywaczszerszeni.WaveFormView
